@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: eb94568fe1e9a034f8f06bc8cd0dc5b2
+timeCreated: 1439882486
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - DemoUI: {instanceID: 0}
+  - TitleCard: {instanceID: 0}
+  - LoseUI: {instanceID: 0}
+  - WinUI: {instanceID: 0}
+  - BarUI: {fileID: 11440410, guid: 3e480b0c0452f6b4abea5c70bc1c2f32, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
