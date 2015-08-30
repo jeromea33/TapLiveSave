@@ -7,17 +7,25 @@ public class HeadacheMiniGame : MiniGame {
 	public BulbScript bulb;
 	public DoorScript door;
 	//==============================================
+	private bool stopExecuting = false;
+
 
 	void Update () {
-		if (IsDoorClosed() && IsWindowClosed() && IsBulbOff()) {
-			Debug.Log ("Win");
-			SetUpWin();
-		}
-		else if (BarUIObject.GetCurrentBarPercentage() < 0.00f){
-			Debug.Log ("Lose");
-			SetUpLose();
+		if (!stopExecuting){
+			if (IsDoorClosed() && IsWindowClosed() && IsBulbOff()) {
+				Debug.Log ("Win");
+				stopExecuting = true;
+				SetUpWin();
+			}
+			else if (BarUIObject.GetCurrentBarPercentage() < 0.00f){
+				Debug.Log ("Lose");
+				stopExecuting = true;
+				SetUpLose();
+			}
 		}
 	}
+
+
 
 	public override void SetUpDemo(){
 
@@ -28,7 +36,7 @@ public class HeadacheMiniGame : MiniGame {
 	}
 
 	public override void SetUpLose(){
-		SignalForEndOfGame();
+		SignalForEndOfGame(0f);
 	}
 
 	private bool winFlag = false;

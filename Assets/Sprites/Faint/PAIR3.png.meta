@@ -1,9 +1,11 @@
 fileFormatVersion: 2
 guid: f07e7def7e308bf4a8226f4e77a983e4
-timeCreated: 1439351700
+timeCreated: 1440838231
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: PAIR3_0
+    21300002: PAIR3_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -30,14 +32,14 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -48,7 +50,27 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: PAIR3_0
+      rect:
+        serializedVersion: 2
+        x: 786
+        y: 0
+        width: 848
+        height: 2061
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PAIR3_1
+      rect:
+        serializedVersion: 2
+        x: 2094
+        y: 36
+        width: 716
+        height: 2018
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
   assetBundleName: 

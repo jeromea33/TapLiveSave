@@ -61,6 +61,7 @@ public class ChokingMinigame : MiniGame {
 	}
 	
 	public override void SetUpLose(){
-		SignalForEndOfGame();
+		GetComponent<Animator>().SetTrigger("LoseTrigger");
+		BarUIObject.gameObject.SetActive(false);
 	}
 }

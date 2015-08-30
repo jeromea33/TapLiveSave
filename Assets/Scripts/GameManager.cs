@@ -6,9 +6,9 @@ using System.Runtime.Serialization;
 public class GameManager : MonoBehaviour {
 
 	public MiniGame[] games;
-	private Difficulty[] gamesMaxDifficulty;
 	public GameObject MainCamera;
-//	public ScoringUI ScoreUI;
+	public ScoringUI ScoreUI;
+	public MainMenu mainMenu;
 	public static bool ThereIsAGame = false;
 	public int realScore = -1;
 	//===================================
@@ -18,16 +18,57 @@ public class GameManager : MonoBehaviour {
 	private int gameNumber = -1;
 
 	#region "Region concerning minigame triggers"
-	
-	public void SignalEndOfGame(){
+
+	/// <summary>
+	/// Signals the end of game.
+	/// </summary>
+	/// <param name="difficulty">Difficulty of the ended game</param>
+	/// <param name="scoreadd">Score that will be added</param>
+	/// <param name="status">0 for lose, 1 for win.</param>
+	public void SignalEndOfGame(Difficulty difficulty, int scoreadd, bool win){
 		Debug.Log (currentMinigame.title + " has ended");
 		Destroy(currentMinigame.gameObject);
+		ScoreUI.score += scoreadd;
+		if(!win){
+			ScoreUI.DecreaseHealth();
+		}
+		else{
+			//GamesStatus.UpdateTitle (currentMinigame.title, difficulty);
+			//GamesStatus.Save ();
+		}
+		MinigamesFinished++;
+		ScoreUI.gameObject.SetActive (true);
+	}
+
+	void OnEnable () {
+		//Create games status if none exist
+		Debug.Log ("Started");
+		mainMenu.gameObject.SetActive (true);
+	}
+
+	/// <summary>
+	/// Is called after score counting is done in the score UI
+	/// </summary>
+	public void ScoreCountingEnded(){
+		ScoreUI.gameObject.SetActive (false);
 		NewGame();
+	}
+
+	IEnumerator wait(){
+		yield return new WaitForSeconds(2f);
+	}
+
+	public void DisableCamera(){
+		MainCamera.SetActive(false);
+	}
+
+	public void EnableCamera(){
+		MainCamera.SetActive(true);
 	}
 	#endregion
 
 	#region "Region concerning game management" 
-	void NewGame(){
+	public void NewGame(){
 		int RandomUpperBound = games.GetLength(0);
 		gameNumber = GetGameNumber (RandomUpperBound);
 		//Show Title
@@ -60,9 +101,6 @@ public class GameManager : MonoBehaviour {
 	}
 
 	// Use this for initialization
-	void OnEnable () {
-		NewGame();
-	}
 
 	int GetGameNumber(int upperbound)
 	{
