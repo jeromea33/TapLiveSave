@@ -11,11 +11,14 @@ public class GameManager : MonoBehaviour {
 	public MainMenu mainMenu;
 	public static bool ThereIsAGame = false;
 	public int realScore = -1;
+	public StagePlace currentStage;
+	public bool resetMinigameStats = false;
 	//===================================
 	private int MinigamesFinished = 0;
 	private MiniGame currentMinigame;
 	private List<string> playedGamesTitle = new List<string>();
 	private int gameNumber = -1;
+
 
 	#region "Region concerning minigame triggers"
 
@@ -29,13 +32,11 @@ public class GameManager : MonoBehaviour {
 		Debug.Log (currentMinigame.title + " has ended");
 		Destroy(currentMinigame.gameObject);
 		ScoreUI.score += scoreadd;
-		if(!win){
+		if(win)
+			GamesStatus.UpdateMinigameStats (currentMinigame.title, difficulty, true);
+		else
 			ScoreUI.DecreaseHealth();
-		}
-		else{
-			//GamesStatus.UpdateTitle (currentMinigame.title, difficulty);
-			//GamesStatus.Save ();
-		}
+		//TODO Gameover if no health
 		MinigamesFinished++;
 		ScoreUI.gameObject.SetActive (true);
 	}
@@ -64,6 +65,10 @@ public class GameManager : MonoBehaviour {
 
 	public void EnableCamera(){
 		MainCamera.SetActive(true);
+	}
+
+	public void SetCurrentStageIn(StagePlace stage){
+		currentStage = stage;
 	}
 	#endregion
 
@@ -137,6 +142,11 @@ public class GameManager : MonoBehaviour {
 		else
 			return Difficulty.Impossible;
 	}
+
+	bool isUnlocked(MiniGame minigame){
+		return minigame.isUnlocked(currentStage);
+	}
+
 	#endregion
 
 	#region "Region concerning saving highscore, and keeping it"

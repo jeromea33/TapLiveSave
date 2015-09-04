@@ -4,6 +4,7 @@ using System.Collections;
 public class MiniGame : MonoBehaviour {
 
 	public string title;
+	public StagePlace StageIn = StagePlace.Home;
 	public GameObject DemoUI; //UI
 	public GameObject TitleCard; //UI
 	public GameObject LoseUI;
@@ -37,6 +38,12 @@ public class MiniGame : MonoBehaviour {
 	protected GameObject MainCamera;
 	protected Difficulty currentDifficulty;
 	protected TimerBarUI BarUIObject;
+
+	protected Difficulty bestDifficultyAccomplished = Difficulty.None;
+
+	public void bestDifficultyAccomplishedUpdate(Difficulty update){
+		bestDifficultyAccomplished = update;
+	}
 
 	public void StartMinigame(Difficulty difficulty, bool enabledemo){
 		if (enabledemo){
@@ -128,8 +135,24 @@ public class MiniGame : MonoBehaviour {
 		return BarUIObject.GetCurrentBarPercentage();
 	}
 
+	/// <summary>
+	/// Returns true if the minigame is unlocked.
+	/// </summary>
+	/// <returns><c>true</c>, if currentScenePlace >= unlocked until, <c>false</c> otherwise.</returns>
+	/// <param name="currentScenePlace">Current unlocked scene place.</param>
+	public bool isUnlocked(StagePlace currentStagePlace){
+		return StageIn <= currentStagePlace;
+	}
+
 	public virtual void SetUpDemo(){}
 	public virtual void SetUpTitle(){}
 	public virtual void SetUpLose(){}
 	public virtual void SetUpWin(){}
 }
+
+public enum StagePlace{
+	Home,
+	School,
+	Outdoor
+}
+

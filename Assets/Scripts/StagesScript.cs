@@ -13,18 +13,30 @@ public class StagesScript : MonoBehaviour {
 	public GameObject mountains;
 	public Color notActivatedColor = new Color(139,139,139);
 	public Color activatedColor = new Color(255,255,255);
+	private GameManager gameManager;
 
+	/// <summary>
+	/// On start of the script, gets GameManager instance and colors everyone
+	/// Also initializes GameStatus
+	/// </summary>
 	void Start(){
+		gameManager = (GameManager)GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+		GamesStatus.InitializeStatus(gameManager.resetMinigameStats);
 		MainCameraFunctions.DisableCamera();
 		goColor ();
 	}
 
+	/// <summary>
+	/// Start the minigames
+	/// </summary>
 	public void StartMinigames(){
 		gameObject.SetActive (false);
 		GameObject.FindGameObjectWithTag ("GameController").GetComponent <GameManager>().NewGame();
 	}
 
-	// Update is called once per frame
+	/// <summary>
+	/// Updates the animation after wait
+	/// </summary>
 	void Update () {
 		wait ();
 		if(IsMountainsUnlocked ()){
@@ -38,10 +50,17 @@ public class StagesScript : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Delays animation for 
+	/// </summary>
 	IEnumerator wait(){
 		yield return new WaitForSeconds(3f);
 	}
 
+
+	/// <summary>
+	/// Colors the 
+	/// </summary>
 	public void goColor(){
 		if(IsSchoolUnlocked()){
 			school.GetComponent<SpriteRenderer>().color = activatedColor;
@@ -84,5 +103,9 @@ public class StagesScript : MonoBehaviour {
 			}
 		}
 		return result;
+	}
+
+	public void changeStagePlace(StagePlace current_stage){
+		gameManager.currentStage = current_stage;
 	}
 }
