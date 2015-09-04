@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 public class GameManager : MonoBehaviour {
+	
+	//public static Difficulty SchoolUnlockedOn = Difficulty.Intermediate;
+	//public static Difficulty OutdoorUnlockedOn = Difficulty.Intermediate;
+	public static string Tag = "GameController";
 
 	public MiniGame[] games;
 	public GameObject MainCamera;

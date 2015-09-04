@@ -34,6 +34,7 @@ public class GamesStatus {
 		//Fill the list
 		foreach (MiniGame item in minigames) {
 			placeholder = new MinigameStats(item.title);
+			minigameStatus.Add (placeholder);
 		}
 	}
 
@@ -44,7 +45,7 @@ public class GamesStatus {
 	/// Load list if it exists
 	/// </summary>
 	public static void InitializeStatus(bool force){
-		MiniGame[] minigames = GameObject.FindGameObjectWithTag ("GameManager").GetComponent<GameManager>().games;
+		MiniGame[] minigames = GameObject.FindGameObjectWithTag (GameManager.Tag).GetComponent<GameManager>().games;
 		if (force){
 			CreateList(minigames);
 			return;
@@ -63,28 +64,18 @@ public class GamesStatus {
 
 	/// <summary>
 	/// Performs a series of test to check wether or not the list of minigames were updated
-	/// 1. Checks if the number of the saved games is equal to the number of the current minigames
-	/// 2. Checks if the games have same names that can ruin everything
-	/// 3. Checks if the games names are the same. If one were changed it failed
+	/// Just have faith
 	/// </summary>
-	/// <returns><c>true</c>, if all tests were passed <c>false</c> otherwise.</returns>
+	/// <returns><c>true</c>, if faithfull <c>false</c> otherwise.</returns>
 	/// <param name="minigames">Minigames</param>
 	private static bool CheckIfUpdated(MiniGame[] minigames){
 		List<string> titles = new List<string>();
 		GamesStatus x = new GamesStatus();
+		bool faith = true;
 		x.GetGames();
-		if (minigames.Length == x._minigameStatus.Count)
+		if (minigames.Length != x._minigameStatus.Count)
 			return false;
-		foreach (MiniGame first in minigames){
-			if (titles.Contains (first.title))
-				return false;
-			else 
-				titles.Add (first.title);
-			foreach (MinigameStats second in x._minigameStatus)
-				if (!first.title.ToLower().Equals (second.title.ToLower()))
-					return false;
-		}
-		return true;
+		return faith;
 	}
 
 	/// <summary>
