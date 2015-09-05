@@ -104,20 +104,20 @@ public class StagesScript : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Updates the animation after wait
+	/// Deprecated: Updates the animation after wait
 	/// </summary>
-	void Update () {
-		wait ();
-		if(IsMountainsUnlocked ()){
-			GetComponent<Animator>().SetTrigger ("ToMountain");
-		}
-		else if (IsSchoolUnlocked()){
-			GetComponent<Animator>().SetTrigger ("ToSchool");
-		}
-		else{
-			GetComponent<Animator>().SetTrigger ("ToHouse");
-		}
-	}
+//	void Update () {
+//		wait ();
+//		if(IsMountainsUnlocked ()){
+//			GetComponent<Animator>().SetTrigger ("ToMountain");
+//		}
+//		else if (IsSchoolUnlocked()){
+//			GetComponent<Animator>().SetTrigger ("ToSchool");
+//		}
+//		else{
+//			GetComponent<Animator>().SetTrigger ("ToHouse");
+//		}
+//	}
 
 	/// <summary>
 	/// Delays animation for 
@@ -183,11 +183,21 @@ public class StagesScript : MonoBehaviour {
 		return result;
 	}
 
-	/// <summary>
-	/// Changes the stage place.
-	/// </summary>
-	/// <param name="current_stage">Current_stage.</param>
-	public void changeStagePlace(StagePlace current_stage){
-		gameManager.currentStage = current_stage;
+	public void toStage(StagePlace stage){
+		if (stage == StagePlace.Home)
+			GetComponent<Animator>().SetTrigger ("ToHouse");
+		else if(IsSchoolUnlocked() && stage == StagePlace.School)
+			GetComponent<Animator>().SetTrigger ("ToSchool");
+		else if (IsMountainsUnlocked() && stage == StagePlace.Outdoor)
+			GetComponent<Animator>().SetTrigger ("ToMountain");
+		if(stage == StagePlace.School)
+			Debug.Log ("School tapped but is unlocked");
+		else if (stage == StagePlace.Outdoor)
+			Debug.Log ("Outdoor tapped but is unlocked");
+	}
+
+	public void goToStage(StagePlace stage){
+		gameManager.SetCurrentStageIn(stage);
+		StartMinigames();
 	}
 }

@@ -11,6 +11,10 @@ public class LeftMaskScript : MonoBehaviour {
 		GetComponent<TapGesture>().Tapped += IsTapped;
 	}
 
+	void OnDisable(){
+		GetComponent<TapGesture>().Tapped -= IsTapped;
+	}
+
 	void IsTapped(object sender, System.EventArgs e)
 	{
 		GetComponentInParent<WindowScript> ().Tapped (direction);
