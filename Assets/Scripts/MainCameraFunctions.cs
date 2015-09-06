@@ -30,4 +30,8 @@ public class MainCameraFunctions : MonoBehaviour {
 	public static void RestoreCameraPosition(){
 		MainCamera.transform.position = OriginalCameraPosition;
 	}
+
+	public static void ChangeBackgroundColor(Color backgroundColor){
+		MainCamera.GetComponent<Camera>().backgroundColor = backgroundColor;
+	}
 }

@@ -3,6 +3,9 @@ using System.Collections;
 
 public class MiniGame : MonoBehaviour {
 
+	public bool isTesting = false;
+	public Difficulty testDiffulty = Difficulty.Easy;
+
 	public string title;
 	public StagePlace StageIn = StagePlace.Home;
 	public GameObject DemoUI; //UI
@@ -40,33 +43,38 @@ public class MiniGame : MonoBehaviour {
 	protected TimerBarUI BarUIObject;
 
 	protected Difficulty bestDifficultyAccomplished = Difficulty.None;
+	public Color BackgroundColor = Color.blue;
+
+	public void Start(){
+		if(isTesting){
+			StartMinigame(testDiffulty, true);
+		}
+	}
 
 	public void bestDifficultyAccomplishedUpdate(Difficulty update){
 		bestDifficultyAccomplished = update;
 	}
 
 	public void StartMinigame(Difficulty difficulty, bool enabledemo){
-		if (enabledemo){
+		if (enabledemo)
 			SetUpDemo();
-		}
 		currentDifficulty = difficulty;
-		if (enabledemo){
+		if (enabledemo)
 			SetUpDemo();
-		}
 		SetUpTitle();
 		SetUp ();
 		SetupCamera();
-		SetBarUI(difficulty);
+		if (useBar)
+			SetBarUI(difficulty);
 		Debug.Log ("Current Game Difficulty: " + difficulty);
 		currentDifficulty = difficulty;
 	}
-
-	public virtual void SetUp(){}
 
 	protected void SetupCamera(){
 		//MainCamera = GameObject.FindGameObjectWithTag ("MainCamera");
 		//MainCamera.SetActive (true);
 		//MainCamera.GetComponent<Camera>().orthographicSize = cameraSize;
+		MainCameraFunctions.ChangeBackgroundColor(BackgroundColor);
 		MainCameraFunctions.EnableCamera();
 		MainCameraFunctions.ChangeCameraSize(cameraSize);
 	}
@@ -124,7 +132,7 @@ public class MiniGame : MonoBehaviour {
 	}
 
 	GameManager GameController(){
-		return GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+		return GameObject.FindGameObjectWithTag(GameManager.Tag).GetComponent<GameManager>();
 	}
 
 	protected void StopTimer(){
@@ -148,6 +156,7 @@ public class MiniGame : MonoBehaviour {
 	public virtual void SetUpTitle(){}
 	public virtual void SetUpLose(){}
 	public virtual void SetUpWin(){}
+	public virtual void SetUp(){}
 }
 
 public enum StagePlace{
