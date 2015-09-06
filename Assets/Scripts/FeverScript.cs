@@ -29,12 +29,14 @@ public class FeverScript : MiniGame {
 	void OnTap(object sender, System.EventArgs e)
 	{
 		Debug.Log ("Tapped: " + gameObject.name);
-		stopped = true;
-		if (GetThermoXScale() >= LowerWinTreshold && GetThermoXScale() <= UpperWinTreshold)
+		if (GetThermoXScale() >= LowerWinTreshold && GetThermoXScale() <= UpperWinTreshold){
+			stopped = true;
 			SetUpWin();
+		}
 		else {
 			GetComponent<TapGesture>().Tapped -= OnTap;
 			Debug.Log ("The tapping of thermometer is disabled. Coz u suck");
+
 		}
 	}
 
@@ -54,9 +56,11 @@ public class FeverScript : MiniGame {
 	public override void SetUpDemo(){
 
 	}
+
 	public override void SetUpTitle(){
 
 	}
+
 	public override void SetUpLose(){
 		MainCameraFunctions.DisableCamera();
 		LoseUI.gameObject.SetActive (true);
@@ -98,6 +102,5 @@ public class FeverScript : MiniGame {
 
 	public float GetThermoXScale(){
 		return ThermoBar.transform.localScale.x;
-	}
-		                                      
+	}                   
 }
