@@ -53,6 +53,13 @@ public class ScoringUI : MonoBehaviour {
 		}
 	}
 
+	public void ResetHealth(){
+		numberOfHealth = 3;
+		Health1.enabled = true;
+		Health2.enabled = true;
+		Health2.enabled = true;
+	}
+
 	public bool IsGameOver(){
 		return (numberOfHealth < 1);
 	}

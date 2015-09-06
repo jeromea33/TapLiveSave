@@ -2,8 +2,22 @@
 using System.Collections;
 
 public class ChokingMinigame : MiniGame {
-	
+
+	[Header("Choking Settings")]
+	[Range(0f, 200f)]
 	public float TapAddValue = 75f;
+	[Range(5f, 0.1f)]
+	public float veryEasyTapMultiplier = 2.25f;
+	[Range(5f, 0.1f)]
+	public float easyTapMultiplier = 1.50f;
+	[Range(5f, 0.1f)]
+	public float intermediateTapMultiplier = 1f;
+	[Range(5f, 0.1f)]
+	public float hardTapMultiplier = 0.80f;
+	[Range(5f, 0.1f)]
+	public float veryHardTapMultiplier = 0.75f;
+	[Range(5f, 0.1f)]
+	public float impossibleTapMultiplier = 0.65f;
 
 	// Update is called once per frame
 
@@ -30,17 +44,17 @@ public class ChokingMinigame : MiniGame {
 	private float GetTimerAdd(){
 		switch (currentDifficulty){
 		case Difficulty.VeryEasy:
-			return TapAddValue * 2.25f;
+			return TapAddValue * veryEasyTapMultiplier;
 		case Difficulty.Easy:
-			return TapAddValue * 1.50f;
+			return TapAddValue * easyTapMultiplier;
 		case Difficulty.Intermediate:
-			return TapAddValue;
+			return TapAddValue * intermediateTapMultiplier;
 		case Difficulty.Hard:
-			return TapAddValue * 0.80f;
+			return TapAddValue * hardTapMultiplier;
 		case Difficulty.VeryHard:
-			return TapAddValue * 0.75f;
+			return TapAddValue * veryHardTapMultiplier;
 		case Difficulty.Impossible:
-			return TapAddValue * 0.65f;
+			return TapAddValue * impossibleTapMultiplier;
 		default:
 			return TapAddValue;
 		}

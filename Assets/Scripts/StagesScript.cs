@@ -81,6 +81,10 @@ public class StagesScript : MonoBehaviour {
 		goColor ();
 	}
 
+	void OnEnable(){
+		GameObject.FindGameObjectWithTag(GameManager.Tag).GetComponent<GameManager>().ScoreUI.ResetHealth();
+	}
+
 	/// <summary>
 	/// Gets the list of titles that corresponds to their stages and maps them.
 	/// </summary>

@@ -251,6 +251,8 @@ public class GameManager : MonoBehaviour {
 	void StartGame(int GameNumber){
 		//MoveCamera (gameNumber);
 		currentMinigame = (MiniGame)Instantiate (GetGame(GameNumber), new Vector3 (0, 0, -10), Quaternion.identity);
+		//currentMinigame = GetGame(GameNumber);
+		//currentMinigame.gameObject.SetActive(true);
 		currentMinigame.StartMinigame(GetDifficulty(), !hasPlayed(currentMinigame.title));
 	}
 

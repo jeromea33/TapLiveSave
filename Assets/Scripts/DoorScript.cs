@@ -26,6 +26,5 @@ public class DoorScript : MonoBehaviour {
 			GetComponent<Animator>().SetBool("State", true);
 			state = "closed";
 		}
-
 	}
 }

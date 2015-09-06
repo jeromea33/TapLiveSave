@@ -11,7 +11,7 @@ using UnityEngine;
 [Serializable]
 public class GamesStatus {
 
-	private const string SAVEPATH = "difdata";
+	private static string SAVEPATH = System.IO.Path.Combine (Application.persistentDataPath, "difdata");
 
 	/// <summary>
 	/// Status list of the minigames

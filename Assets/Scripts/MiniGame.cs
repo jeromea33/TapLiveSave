@@ -3,9 +3,13 @@ using System.Collections;
 
 public class MiniGame : MonoBehaviour {
 
+	[Header("Test Settings")]
+	[Tooltip("True if you are going to test the scenario")]
 	public bool isTesting = false;
+	[Tooltip("Difficulty of the test")]
 	public Difficulty testDiffulty = Difficulty.Easy;
 
+	[Header("General Settings")]
 	public string title;
 	public StagePlace StageIn = StagePlace.Home;
 	public GameObject DemoUI; //UI
@@ -13,9 +17,11 @@ public class MiniGame : MonoBehaviour {
 	public GameObject LoseUI;
 	public GameObject WinUI;
 	public TimerBarUI BarUI;
-	[Range(5, 20)]
+	[Range(5, 20)]	
 	public float cameraSize = 5f;
+	public Color BackgroundColor = Color.blue;
 
+	[Header("Timer Bar Settings")]
 	public bool useBar = false;
 	
 	[Range(0.1f, 100f)]
@@ -25,6 +31,7 @@ public class MiniGame : MonoBehaviour {
 	public float initialBarValuePercentage;
 	public bool isBarIncreasing = false;
 
+	[Header("General Difficulty Settings")]
 	[Range(0.01f, 1f)]
 	public float veryEasyMultiplier = 0.55f;
 	[Range(0.01f, 1f)]
@@ -43,7 +50,6 @@ public class MiniGame : MonoBehaviour {
 	protected TimerBarUI BarUIObject;
 
 	protected Difficulty bestDifficultyAccomplished = Difficulty.None;
-	public Color BackgroundColor = Color.blue;
 
 	public void Start(){
 		if(isTesting){
@@ -56,6 +62,7 @@ public class MiniGame : MonoBehaviour {
 	}
 
 	public void StartMinigame(Difficulty difficulty, bool enabledemo){
+		isTesting = false;
 		if (enabledemo)
 			SetUpDemo();
 		currentDifficulty = difficulty;
@@ -84,7 +91,9 @@ public class MiniGame : MonoBehaviour {
 	}
 
 	void OnDestroy(){
-		Destroy (BarUIObject.gameObject);
+		if(useBar){
+			Destroy (BarUIObject.gameObject);
+		}
 	}
 
 	protected void SetBarUI(Difficulty difficulty){
@@ -150,6 +159,14 @@ public class MiniGame : MonoBehaviour {
 	/// <param name="currentScenePlace">Current unlocked scene place.</param>
 	public bool isUnlocked(StagePlace currentStagePlace){
 		return StageIn <= currentStagePlace;
+	}
+
+	protected void Disable(){
+		gameObject.SetActive (false);
+	}
+
+	protected void Enable(){
+		gameObject.SetActive (true);
 	}
 
 	public virtual void SetUpDemo(){}
