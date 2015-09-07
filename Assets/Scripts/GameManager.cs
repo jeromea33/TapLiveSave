@@ -6,6 +6,7 @@ using System.Linq;
 
 public class GameManager : MonoBehaviour {
 
+
 	/// <summary>
 	/// The tag uses this controller. Used for housekeeping and safety (Less bugs)
 	/// </summary>
@@ -27,6 +28,11 @@ public class GameManager : MonoBehaviour {
 	/// scoreUI score is changed
 	/// </summary>
 	public ScoringUI ScoreUI;
+
+	/// <summary>
+	/// Reference to pause menu
+	/// </summary>
+	public GameObject pauseMenu;
 
 	/// <summary>
 	/// The reference to the main menu
@@ -166,7 +172,6 @@ public class GameManager : MonoBehaviour {
 		MinigamesFinished = 0;
 		currentStage = stage;
 	}
-	#endregion
 
 	/// <summary>
 	/// Runs this code upon life == 0
@@ -174,6 +179,9 @@ public class GameManager : MonoBehaviour {
 	void GameOver(){
 		mainMenu.gameObject.SetActive (true);
 	}
+
+
+	#endregion
 	
 	#region "Region concerning game management" 
 
@@ -338,6 +346,22 @@ public class GameManager : MonoBehaviour {
 				return StagePlace.School;
 		}
 		return StagePlace.Outdoor;
+	}
+
+	#endregion
+
+	#region "Region concerning pausing the game"
+
+	public bool Paused(){
+		return Time.timeScale == 1.0f;
+	}
+
+	void Pause(){
+		Time.timeScale = 0f;
+	}
+
+	void UnPause(){
+		Time.timeScale = 1f;
 	}
 
 	#endregion

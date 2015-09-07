@@ -169,6 +169,10 @@ public class MiniGame : MonoBehaviour {
 		gameObject.SetActive (true);
 	}
 
+	void Update(){
+
+	}
+
 	public virtual void SetUpDemo(){}
 	public virtual void SetUpTitle(){}
 	public virtual void SetUpLose(){}
