@@ -41,6 +41,17 @@ public class ChokingMinigame : MiniGame {
 		AddToBar(addvalue);
 	}
 
+
+	public override void SetUpWin(){
+		GetComponent<Animator>().SetTrigger ("WinTrigger");
+		BarUIObject.MakeBarFull();
+		BarUIObject.gameObject.SetActive (false);
+	}
+
+	public override void SetUpDemo(){
+		
+	}
+
 	private float GetTimerAdd(){
 		switch (currentDifficulty){
 		case Difficulty.VeryEasy:
@@ -60,16 +71,6 @@ public class ChokingMinigame : MiniGame {
 		}
 	}
 
-	public override void SetUpWin(){
-		GetComponent<Animator>().SetTrigger ("WinTrigger");
-		BarUIObject.MakeBarFull();
-		BarUIObject.gameObject.SetActive (false);
-	}
-
-	public override void SetUpDemo(){
-		
-	}
-	
 	public override void SetUpTitle(){
 		
 	}

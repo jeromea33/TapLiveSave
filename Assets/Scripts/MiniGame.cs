@@ -62,7 +62,6 @@ public class MiniGame : MonoBehaviour {
 	}
 
 	public void StartMinigame(Difficulty difficulty, bool enabledemo){
-		isTesting = false;
 		if (enabledemo)
 			SetUpDemo();
 		currentDifficulty = difficulty;
@@ -70,19 +69,23 @@ public class MiniGame : MonoBehaviour {
 			SetUpDemo();
 		SetUpTitle();
 		SetUp ();
-		SetupCamera();
+		try{
+			SetupCamera();
+		}
+		catch{}
 		if (useBar)
 			SetBarUI(difficulty);
 		Debug.Log ("Current Game Difficulty: " + difficulty);
 		currentDifficulty = difficulty;
+		isTesting = false;
 	}
 
 	protected void SetupCamera(){
 		//MainCamera = GameObject.FindGameObjectWithTag ("MainCamera");
 		//MainCamera.SetActive (true);
 		//MainCamera.GetComponent<Camera>().orthographicSize = cameraSize;
-		MainCameraFunctions.ChangeBackgroundColor(BackgroundColor);
 		MainCameraFunctions.EnableCamera();
+		MainCameraFunctions.ChangeBackgroundColor(BackgroundColor);
 		MainCameraFunctions.ChangeCameraSize(cameraSize);
 	}
 
@@ -167,10 +170,6 @@ public class MiniGame : MonoBehaviour {
 
 	protected void Enable(){
 		gameObject.SetActive (true);
-	}
-
-	void Update(){
-
 	}
 
 	public virtual void SetUpDemo(){}
