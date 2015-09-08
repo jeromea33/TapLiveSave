@@ -182,7 +182,6 @@ public class GameManager : MonoBehaviour {
 	/// Runs this code upon life == 0
 	/// </summary>
 	void GameOver(){
-		ScoreUI.GameOver();
 		ScoreUI.gameObject.SetActive (true);
 	}
 
@@ -430,4 +429,9 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 	#endregion
+
+	public void reset(){
+		this.gameObject.SetActive (false);
+		this.gameObject.SetActive (true);
+	}
 }

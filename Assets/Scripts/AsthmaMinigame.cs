@@ -63,7 +63,6 @@ public class AsthmaMinigame : MiniGame {
 			}
 			if (AsthmaBar.transform.localScale.y >= MaxBarLength){
 				AsthmaBar.transform.localScale = new Vector3(BarWidth, MaxBarLength);
-
 				SetUpWin();
 			}
 		}

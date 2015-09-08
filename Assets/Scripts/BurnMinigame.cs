@@ -68,9 +68,9 @@ public class BurnMinigame : MiniGame {
 	public override void SetUpWin(){
 		stopped = true;
 		DestroyTimer();
-		//faucet.SetActive (false);
-		//sink.SetActive (false);
-		//hand.SetActive (false);
+		faucet.SetActive (false);
+		sink.SetActive (false);
+		hand.SetActive (false);
 		WinUI.SetActive (true);
 	}
 

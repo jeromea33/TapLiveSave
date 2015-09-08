@@ -164,16 +164,7 @@ public class StagesScript : MonoBehaviour {
 	/// </summary>
 	/// <returns><c>true</c> if school stage is unlocked; otherwise, <c>false</c>.</returns>
 	public bool IsSchoolUnlocked(){
-		bool result = false;
-		foreach(string title in homeMinigameTitles){
-			if (GamesStatus.GetDifficultyOf (title) >= requiredSchoolDifficulty){
-				result = true;
-			}
-			else{ 
-				return false;
-			}
-		}
-		return result;
+		return GameManager.ForceLoadScore() >= highScoreSchoolUnlock;
 	}
 
 	/// <summary>
@@ -181,16 +172,7 @@ public class StagesScript : MonoBehaviour {
 	/// </summary>
 	/// <returns><c>true</c> if outdoor stage is unlocked; otherwise, <c>false</c>.</returns>
 	public bool IsMountainsUnlocked(){
-		bool result = false;
-		foreach(string title in schoolMinigameTitles){
-			if (GamesStatus.GetDifficultyOf (title) >= requiredMountainsDifficulty){
-				result = true;
-			}
-			else{
-				return false;
-			}
-		}
-		return result;
+		return GameManager.ForceLoadScore() >= highScoreOutdoorUnlock;
 	}
 
 	public void toStage(StagePlace stage){

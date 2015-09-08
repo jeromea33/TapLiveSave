@@ -3,7 +3,8 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class ScoringUI : MonoBehaviour {
-
+	
+	public Button gameOverButton;
 	public Text scoreText;
 	public Text highScoreText;
 	public Image Health1;
@@ -16,6 +17,7 @@ public class ScoringUI : MonoBehaviour {
 	public Sprite sceneComplete;
 	public Sprite sceneFail;
 	public Sprite gameOver;
+	public GameManager gameManager;
 
 	public int score = 0;
 	public int numberOfHealth = 3;
@@ -38,7 +40,13 @@ public class ScoringUI : MonoBehaviour {
 		else if (internalScore > score)
 			AddToScore(-1);
 		else if (internalScore == score){
-			StartCoroutine(FinishedCounting ());
+			if (IsGameOver()){
+				GameOver();
+				return;
+			}
+			else{
+				StartCoroutine(FinishedCounting ());
+			}
 		}
 		else
 			isCounting = false;
@@ -71,10 +79,25 @@ public class ScoringUI : MonoBehaviour {
 
 	public void GameOver(){
 		UpperText.sprite = gameOver;
+		Health1.enabled = false;
+		Health2.enabled = false;
+		Health3.enabled = false;
+		gameOverButton.gameObject.SetActive (true);
+	}
+
+	public void GameOverPress(){
+		gameOverButton.gameObject.SetActive (false);
+		gameObject.SetActive (false);
+		ResetHealth();
+		ResetScore();
+		gameManager.reset();
 	}
 
 	public void ResetHealth(){
 		numberOfHealth = 3;
+		Health1.enabled = true;
+		Health2.enabled = true;
+		Health3.enabled = true;
 		Health1.sprite = health;
 		Health2.sprite = health;
 		Health3.sprite = health;
