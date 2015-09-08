@@ -32,11 +32,11 @@ public class MiniGame : MonoBehaviour {
 	public bool isBarIncreasing = false;
 
 	[Header("General Difficulty Settings")]
-	[Range(0.01f, 1f)]
+	[Range(0.01f, 5f)]
 	public float veryEasyMultiplier = 0.55f;
-	[Range(0.01f, 1f)]
+	[Range(0.01f, 5f)]
 	public float easyMultiplier = 0.85f;
-	[Range(0.01f, 2f)]
+	[Range(0.01f, 5f)]
 	public float intermeddiateMultiplier = 1f;
 	[Range(0.01f, 5f)]
 	public float hardMultiplier = 2.25f;
@@ -90,12 +90,14 @@ public class MiniGame : MonoBehaviour {
 	}
 
 	protected void AddToBar(float value){
-		BarUIObject.AddToTimer (value);
+		if (BarUIObject != null)
+			BarUIObject.AddToTimer (value);
 	}
 
 	void OnDestroy(){
 		if(useBar){
-			Destroy (BarUIObject.gameObject);
+			if (BarUIObject != null)
+				Destroy (BarUIObject.gameObject);
 		}
 	}
 
@@ -148,11 +150,15 @@ public class MiniGame : MonoBehaviour {
 	}
 
 	protected void StopTimer(){
-		BarUIObject.StopTimer();
+		if (BarUIObject != null)
+			BarUIObject.StopTimer();
 	}
 
 	protected float GetBarPercentage(){
-		return BarUIObject.GetCurrentBarPercentage();
+		if (BarUIObject != null)
+			return BarUIObject.GetCurrentBarPercentage();
+		else
+			return 0;
 	}
 
 	/// <summary>
@@ -170,6 +176,10 @@ public class MiniGame : MonoBehaviour {
 
 	protected void Enable(){
 		gameObject.SetActive (true);
+	}
+
+	protected void DestroyTimer(){
+		Destroy (BarUIObject.gameObject);
 	}
 
 	public virtual void SetUpDemo(){}
