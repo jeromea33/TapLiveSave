@@ -54,9 +54,6 @@ public class NosebleedMinigame : MiniGame {
 		maskRight.GetComponent<SimplePanGesture>().PanCompleted -= OnPanEndRight;
 	}
 
-	public override void SetUpDemo(){
-
-	}
 
 	public override void SetUpTitle(){
 

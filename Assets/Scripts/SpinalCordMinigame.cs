@@ -17,9 +17,7 @@ public class SpinalCordMinigame : MiniGame {
 		}
 	}
 
-	public override void SetUpDemo(){
 
-	}
 
 	public override void SetUpTitle(){
 

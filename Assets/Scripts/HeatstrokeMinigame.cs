@@ -76,10 +76,7 @@ public class HeatstrokeMinigame : MiniGame {
 		}
 		return x;
 	}
-
-	public override void SetUpDemo(){
-
-	}
+	
 
 	public override void SetUpTitle(){
 

@@ -38,7 +38,7 @@ public class BurnMinigame : MiniGame {
 					return;
 				}
 			}
-			if(GetBarPercentage() < 0f){
+			if(GetBarPercentage() < 0f && BarUIObject != null){
 				SetUpLose();
 			}
 			particleSystem.emissionRate = Mathf.InverseLerp(0f, activateRayCastTreshold, getHandleRotation()) * MaximumParticleCount;
@@ -49,9 +49,7 @@ public class BurnMinigame : MiniGame {
 		return handle.transform.rotation.eulerAngles.z;
 	}
 
-	public override void SetUpDemo(){
 
-	}
 
 	public override void SetUpTitle(){
 

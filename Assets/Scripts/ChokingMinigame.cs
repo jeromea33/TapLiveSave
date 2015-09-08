@@ -48,10 +48,6 @@ public class ChokingMinigame : MiniGame {
 		BarUIObject.gameObject.SetActive (false);
 	}
 
-	public override void SetUpDemo(){
-		
-	}
-
 	private float GetTimerAdd(){
 		switch (currentDifficulty){
 		case Difficulty.VeryEasy:

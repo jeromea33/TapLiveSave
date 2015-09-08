@@ -51,11 +51,6 @@ public class FeverScript : MiniGame {
 		else{
 		}
 	}
-	
-
-	public override void SetUpDemo(){
-
-	}
 
 	public override void SetUpTitle(){
 

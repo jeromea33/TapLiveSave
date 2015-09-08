@@ -57,7 +57,7 @@ public class AsthmaMinigame : MiniGame {
 	void Update () {
 		if (!stopped){
 			AsthmaBar.transform.localScale -= new Vector3(0f, RealBarDecreaseValue()) * Time.deltaTime;
-			if (GetBarPercentage() <= 0f){
+			if (GetBarPercentage() <= 0f && BarUIObject != null){
 				SetUpLose();
 			}
 			if (AsthmaBar.transform.localScale.y >= MaxBarLength){
@@ -72,9 +72,6 @@ public class AsthmaMinigame : MiniGame {
 		return AsthmaBar.transform.localScale.y;
 	}
 
-	public override void SetUpDemo(){
-
-	}
 
 	public override void SetUpTitle(){
 
@@ -82,17 +79,17 @@ public class AsthmaMinigame : MiniGame {
 
 	public override void SetUpLose(){
 		stopped = true;
+		DestroyTimer();
 		Asthmagirl.SetActive (false);
 		AsthmaMainBar.SetActive (false);
-		DestroyTimer();
 		LoseUI.SetActive(true);
 	}
 
 	public override void SetUpWin(){
 		stopped = true;
+		DestroyTimer();
 		Asthmagirl.SetActive (false);
 		AsthmaMainBar.SetActive (false);
-		DestroyTimer();
 		WinUI.SetActive(true);
 	}
 

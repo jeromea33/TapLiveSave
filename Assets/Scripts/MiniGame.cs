@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class MiniGame : MonoBehaviour {
+
+
 
 	[Header("Test Settings")]
 	[Tooltip("True if you are going to test the scenario")]
@@ -13,6 +16,8 @@ public class MiniGame : MonoBehaviour {
 	public string title;
 	public StagePlace StageIn = StagePlace.Home;
 	public GameObject DemoUI; //UI
+	public Sprite DemoImage;
+	public float DemoWaitTime = 2f;
 	public GameObject TitleCard; //UI
 	public GameObject LoseUI;
 	public GameObject WinUI;
@@ -51,9 +56,11 @@ public class MiniGame : MonoBehaviour {
 
 	protected Difficulty bestDifficultyAccomplished = Difficulty.None;
 
+	protected GameManager gameManager;
+
 	public void Start(){
 		if(isTesting){
-			StartMinigame(testDiffulty, true);
+			StartCoroutine(StartMinigame(testDiffulty, true));
 		}
 	}
 
@@ -61,12 +68,15 @@ public class MiniGame : MonoBehaviour {
 		bestDifficultyAccomplished = update;
 	}
 
-	public void StartMinigame(Difficulty difficulty, bool enabledemo){
-		if (enabledemo)
+	public IEnumerator StartMinigame(Difficulty difficulty, bool enabledemo){
+		gameManager = GameObject.FindGameObjectWithTag (GameManager.Tag).GetComponent<GameManager>();
+		if (enabledemo && DemoImage != null){
+			Debug.Log ("Wait Time: " + DemoWaitTime);
 			SetUpDemo();
+			yield return new WaitForSeconds(DemoWaitTime);
+			gameManager.DemoUI.SetActive(false);
+		}
 		currentDifficulty = difficulty;
-		if (enabledemo)
-			SetUpDemo();
 		SetUpTitle();
 		SetUp ();
 		try{
@@ -161,6 +171,10 @@ public class MiniGame : MonoBehaviour {
 			return 0;
 	}
 
+	protected IEnumerator MinigameWait(float timer){
+		yield return new WaitForSeconds(timer);
+	}
+
 	/// <summary>
 	/// Returns true if the minigame is unlocked.
 	/// </summary>
@@ -179,10 +193,16 @@ public class MiniGame : MonoBehaviour {
 	}
 
 	protected void DestroyTimer(){
-		Destroy (BarUIObject.gameObject);
+		foreach(GameObject timer in GameObject.FindGameObjectsWithTag("TimerBar")){
+			DestroyImmediate (timer);
+		}
 	}
 
-	public virtual void SetUpDemo(){}
+	public void SetUpDemo(){
+		gameManager.DemoUI.SetActive (true);
+		gameManager.DemoUIPanel.GetComponent <Image>().sprite = DemoImage;
+	}
+
 	public virtual void SetUpTitle(){}
 	public virtual void SetUpLose(){}
 	public virtual void SetUpWin(){}

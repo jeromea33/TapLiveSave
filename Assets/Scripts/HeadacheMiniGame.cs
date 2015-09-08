@@ -27,9 +27,7 @@ public class HeadacheMiniGame : MiniGame {
 
 
 
-	public override void SetUpDemo(){
 
-	}
 
 	public override void SetUpTitle(){
 

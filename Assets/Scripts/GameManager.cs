@@ -6,6 +6,8 @@ using System.Linq;
 
 public class GameManager : MonoBehaviour {
 
+	public GameObject DemoUI;
+	public GameObject DemoUIPanel;
 
 	/// <summary>
 	/// The tag uses this controller. Used for housekeeping and safety (Less bugs)
@@ -118,10 +120,12 @@ public class GameManager : MonoBehaviour {
 		Debug.Log (currentMinigame.title + " has ended");
 		Destroy(currentMinigame.gameObject);
 		ScoreUI.score += scoreadd;
-		if(win)
+		if(win){
 			GamesStatus.UpdateMinigameStats (currentMinigame.title, difficulty, true);
+			ScoreUI.SetUpComplete();
+		}
 		else
-			ScoreUI.DecreaseHealth();
+			ScoreUI.SetUpFail();
 		if (ScoreUI.numberOfHealth == 0){
 			GameOver();
 			return;
@@ -177,6 +181,11 @@ public class GameManager : MonoBehaviour {
 	/// Runs this code upon life == 0
 	/// </summary>
 	void GameOver(){
+		ScoreUI.GameOver();
+		ScoreUI.gameObject.SetActive (true);
+	}
+
+	public void SignalForMainMenu(){
 		mainMenu.gameObject.SetActive (true);
 	}
 
@@ -190,12 +199,17 @@ public class GameManager : MonoBehaviour {
 	/// mode_all = Will play all unlockes stages
 	/// off mode_all = Will play stages only belong to current stage. Won't update it either
 	/// </summary>
+
+	private int lastGamePlayed;
 	public void NewGame(){
 		//Calculate current stage
 		bool continueFlag = true;
 		StagePlace x;
 		while (continueFlag){
-			gameNumber = GetGameNumber (games.GetLength(0));
+			gameNumber = lastGamePlayed;
+			while(gameNumber == lastGamePlayed){
+				gameNumber = GetGameNumber (games.GetLength(0));
+			}
 			x = games[gameNumber].StageIn;
 			if(allGamesMode){
 				if (x <= currentStage){
@@ -261,7 +275,7 @@ public class GameManager : MonoBehaviour {
 		currentMinigame = (MiniGame)Instantiate (GetGame(GameNumber), new Vector3 (0, 0, -10), Quaternion.identity);
 		//currentMinigame = GetGame(GameNumber);
 		//currentMinigame.gameObject.SetActive(true);
-		currentMinigame.StartMinigame(GetDifficulty(), !hasPlayed(currentMinigame.title));
+		StartCoroutine(currentMinigame.StartMinigame(GetDifficulty(), /*!hasPlayed(currentMinigame.title)*/ true));
 	}
 
 	/// <summary>
