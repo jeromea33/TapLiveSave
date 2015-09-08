@@ -131,6 +131,7 @@ public class GameManager : MonoBehaviour {
 			return;
 		}
 		MinigamesFinished++;
+		UpdateHighScore();
 		ScoreUI.gameObject.SetActive (true);
 	}
 
@@ -227,6 +228,7 @@ public class GameManager : MonoBehaviour {
 		TitleProcedure(gameNumber);
 		//Show Demo
 		StartGame (gameNumber);
+		lastGamePlayed = gameNumber;
 	}
 
 	/// <summary>
@@ -370,11 +372,13 @@ public class GameManager : MonoBehaviour {
 		return Time.timeScale == 1.0f;
 	}
 
-	void Pause(){
+	public void Pause(){
+		pauseMenu.SetActive (true);
 		Time.timeScale = 0f;
 	}
 
-	void UnPause(){
+	public void UnPause(){
+		pauseMenu.SetActive (false);
 		Time.timeScale = 1f;
 	}
 
@@ -382,22 +386,47 @@ public class GameManager : MonoBehaviour {
 
 	#region "Region concerning saving highscore, and keeping it"
 	
-	public int highScore = -1;
+	public static int highScore = -1;
 
-	void updateUI(){
-//		ScoringUI.realScore = realScore;
+	void UpdateScoreUI(){
+		ScoreUI.UpdateHighScore(CurrentScore());
 	}
 
-	void saveScore(){
-		PlayerPrefs.SetInt("HighScore", realScore);
+	void UpdateHighScore(){
+		if (CurrentScore() >  highScore){
+			highScore = CurrentScore();
+			UpdateScoreUI();
+			SaveScore();
+		}
 	}
 
-	void loadScore(){
+	public void SaveScore(){
+		PlayerPrefs.SetInt("HighScore", CurrentScore());
+	}
+
+	public int LoadScore(){
 		try{
-			highScore = PlayerPrefs.GetInt ("Highscore");
+			highScore = PlayerPrefs.GetInt ("HighScore");
+			ScoreUI.UpdateHighScore (GameManager.highScore);
+			return highScore;
 		}
 		catch(UnityException e){
-			highScore = 0;
+			return highScore = 0;
+		}
+	}
+
+	int CurrentScore(){
+		return ScoreUI.score;
+	}
+
+	public static int ForceLoadScore(){
+		try{
+			highScore = PlayerPrefs.GetInt ("HighScore");
+			return highScore;
+		}
+		catch(UnityException e)
+		{
+			return 0;
 		}
 	}
 	#endregion

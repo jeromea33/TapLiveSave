@@ -10,7 +10,8 @@ public class HeadacheMiniGame : MiniGame {
 	private bool stopExecuting = false;
 
 
-	void Update () {
+	public override void Update () {
+		base.Update();
 		if (!stopExecuting){
 			if (IsDoorClosed() && IsWindowClosed() && IsBulbOff()) {
 				Debug.Log ("Win");

@@ -57,6 +57,7 @@ public class MiniGame : MonoBehaviour {
 	protected Difficulty bestDifficultyAccomplished = Difficulty.None;
 
 	protected GameManager gameManager;
+	protected bool StartProcess = false;
 
 	public void Start(){
 		if(isTesting){
@@ -88,6 +89,7 @@ public class MiniGame : MonoBehaviour {
 		Debug.Log ("Current Game Difficulty: " + difficulty);
 		currentDifficulty = difficulty;
 		isTesting = false;
+		StartProcess = true;
 	}
 
 	protected void SetupCamera(){
@@ -201,6 +203,25 @@ public class MiniGame : MonoBehaviour {
 	public void SetUpDemo(){
 		gameManager.DemoUI.SetActive (true);
 		gameManager.DemoUIPanel.GetComponent <Image>().sprite = DemoImage;
+	}
+
+	public virtual void Update(){
+		Debug.Log ("Acceleration" + Input.acceleration.x);
+		Debug.Log ("Menu Button" + Input.GetAxis("MenuAxis"));
+
+		if(Application.platform == RuntimePlatform.Android){
+			if (Input.GetKey (KeyCode.Escape)){
+				gameManager.Pause();
+			}
+		}
+
+		if (Input.GetKey (KeyCode.Escape)){
+			gameManager.Pause();
+		}
+
+		if (!StartProcess){
+			return;
+		}
 	}
 
 	public virtual void SetUpTitle(){}

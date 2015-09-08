@@ -28,7 +28,8 @@ public class NosebleedMinigame : MiniGame {
 	public float leftToRight = 100f;
 
 	// Update is called once per frame
-	void Update () {
+	public override void Update () {
+		base.Update();
 		if(getBloodLength() > gameEndTreshold){
 			SetUpLose();
 		}

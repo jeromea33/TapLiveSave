@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class ScoringUI : MonoBehaviour {
 
 	public Text scoreText;
+	public Text highScoreText;
 	public Image Health1;
 	public Image Health2;
 	public Image Health3;
@@ -21,6 +22,14 @@ public class ScoringUI : MonoBehaviour {
 	private int internalScore = 0;
 
 	private bool isCounting = false;
+
+	/// <summary>
+	/// To force loading of highscore
+	/// </summary>
+	void OnEnable(){
+		highScoreText.text = GameManager.ForceLoadScore().ToString();
+	}
+
 	// Update is called once per frame
 	void Update () {
 		internalScore = int.Parse (scoreText.text);
@@ -69,6 +78,8 @@ public class ScoringUI : MonoBehaviour {
 		Health1.sprite = health;
 		Health2.sprite = health;
 		Health3.sprite = health;
+		score = 0;
+		scoreText.text = "0";
 	}
 
 	public void SetUpComplete(){
@@ -94,5 +105,9 @@ public class ScoringUI : MonoBehaviour {
 		x += howMany;
 		scoreText.text = x.ToString();
 		isCounting = true;
+	}
+
+	public void UpdateHighScore(int hs){
+		highScoreText.text = hs.ToString();
 	}
 }

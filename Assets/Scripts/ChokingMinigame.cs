@@ -22,8 +22,8 @@ public class ChokingMinigame : MiniGame {
 	// Update is called once per frame
 
 	private bool endflag = false;
-	void Update (){
-	if (!endflag)
+	public override void Update () {
+		base.Update();
 		if (GetBarPercentage() > 1f){
 			SetUpWin ();
 			endflag = true;

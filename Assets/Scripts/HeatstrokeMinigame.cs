@@ -23,7 +23,8 @@ public class HeatstrokeMinigame : MiniGame {
 
 
 	// Update is called once per frame
-	void Update () {
+	public override void Update () {
+		base.Update();
 		//Debug.Log (BoundsBoxContainsPeople());
 		if(BarUIObject.GetCurrentBarPercentage() < 0){
 			if(BoundsBoxContainsPeople() < 1)

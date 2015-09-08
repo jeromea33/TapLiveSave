@@ -11,6 +11,12 @@ public class StagesScript : MonoBehaviour {
 	/// </summary>
 	public static string Tag = "StageController";
 
+	[Range(0, 5000)]
+	public int highScoreSchoolUnlock = 1000;
+
+	[Range(0, 5000)]
+	public int highScoreOutdoorUnlock = 2000;
+
 	/// <summary>
 	/// The required difficulty in order for the school scenarios to be unlocked
 	/// </summary>

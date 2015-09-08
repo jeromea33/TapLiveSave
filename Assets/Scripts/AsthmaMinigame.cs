@@ -54,7 +54,8 @@ public class AsthmaMinigame : MiniGame {
 	private bool stopped = false;
 
 	// Update is called once per frame
-	void Update () {
+	public override void Update () {
+		base.Update();
 		if (!stopped){
 			AsthmaBar.transform.localScale -= new Vector3(0f, RealBarDecreaseValue()) * Time.deltaTime;
 			if (GetBarPercentage() <= 0f && BarUIObject != null){

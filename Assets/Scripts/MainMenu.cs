@@ -4,6 +4,7 @@ using System.Collections;
 public class MainMenu : MonoBehaviour {
 
 	public GameObject Stages;
+	public int currentHighScore;
 	
 	public void OnTapStart(){
 		gameObject.SetActive (false);
@@ -13,8 +14,8 @@ public class MainMenu : MonoBehaviour {
 
 	AudioSource audio;
 	
-	void Start() {
-		//audio = GetComponent<AudioSource>();
+	void OnEnable(){
+		currentHighScore = GameManager.ForceLoadScore();
 	}
 
 /**

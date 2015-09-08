@@ -27,7 +27,8 @@ public class BurnMinigame : MiniGame {
 
 	// Update is called once per frame
 	// Bizzare math here. DO NOT TOUCH
-	void Update () {
+	public override void Update () {
+		base.Update();
 		if (!stopped){
 			RaycastHit2D rayCasthit = Physics2D.Raycast(RayCastOrigin.transform.position, RayCastRotation);
 			Debug.DrawRay(RayCastOrigin.transform.position, RayCastRotation);
