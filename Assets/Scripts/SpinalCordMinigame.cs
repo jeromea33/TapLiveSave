@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using TouchScript.Gestures;
 
@@ -16,12 +16,6 @@ public class SpinalCordMinigame : MiniGame {
 		if(GetBarPercentage() < 0f){
 			SetUpWin();
 		}
-	}
-
-
-
-	public override void SetUpTitle(){
-
 	}
 
 	public override void SetUpLose(){

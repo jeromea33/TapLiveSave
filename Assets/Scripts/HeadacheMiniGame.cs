@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class HeadacheMiniGame : MiniGame {
@@ -24,14 +24,6 @@ public class HeadacheMiniGame : MiniGame {
 				SetUpLose();
 			}
 		}
-	}
-
-
-
-
-
-	public override void SetUpTitle(){
-
 	}
 
 	public override void SetUpLose(){

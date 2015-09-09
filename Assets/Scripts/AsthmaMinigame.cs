@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using TouchScript.Gestures;
 
@@ -71,12 +71,7 @@ public class AsthmaMinigame : MiniGame {
 	float getBarStatus(){
 		return AsthmaBar.transform.localScale.y;
 	}
-
-
-	public override void SetUpTitle(){
-
-	}
-
+	
 	public override void SetUpLose(){
 		stopped = true;
 		DestroyTimer();

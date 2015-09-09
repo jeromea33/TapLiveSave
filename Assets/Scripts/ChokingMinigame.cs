@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class ChokingMinigame : MiniGame {
@@ -67,10 +67,6 @@ public class ChokingMinigame : MiniGame {
 		}
 	}
 
-	public override void SetUpTitle(){
-		
-	}
-	
 	public override void SetUpLose(){
 		GetComponent<Animator>().SetTrigger("LoseTrigger");
 		BarUIObject.gameObject.SetActive(false);

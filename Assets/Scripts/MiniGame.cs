@@ -18,6 +18,8 @@ public class MiniGame : MonoBehaviour {
 	public GameObject DemoUI; //UI
 	public Sprite DemoImage;
 	public float DemoWaitTime = 2f;
+	public Sprite HintImage;
+	public float HintWaitTime = 2f;
 	public GameObject TitleCard; //UI
 	public GameObject LoseUI;
 	public GameObject WinUI;
@@ -78,12 +80,16 @@ public class MiniGame : MonoBehaviour {
 			gameManager.DemoUI.SetActive(false);
 		}
 		currentDifficulty = difficulty;
-		SetUpTitle();
 		SetUp ();
 		try{
 			SetupCamera();
 		}
 		catch{}
+		SetUpHint();
+		MainCameraFunctions.DisableInput();
+		yield return new WaitForSeconds(HintWaitTime);
+		MainCameraFunctions.EnableInput();
+		gameManager.HintUI.SetActive (false);
 		if (useBar)
 			SetBarUI(difficulty);
 		Debug.Log ("Current Game Difficulty: " + difficulty);
@@ -205,9 +211,14 @@ public class MiniGame : MonoBehaviour {
 		gameManager.DemoUIPanel.GetComponent <Image>().sprite = DemoImage;
 	}
 
+	public void SetUpHint(){
+		gameManager.HintUI.SetActive (true);
+		gameManager.HintUIPanel.GetComponent <Image>().sprite = HintImage;
+	}
+
 	public virtual void Update(){
-		Debug.Log ("Acceleration" + Input.acceleration.x);
-		Debug.Log ("Menu Button" + Input.GetAxis("MenuAxis"));
+		//Debug.Log ("Acceleration" + Input.acceleration.x);
+		//Debug.Log ("Menu Button" + Input.GetAxis("MenuAxis"));
 
 		if(Application.platform == RuntimePlatform.Android){
 			if (Input.GetKey (KeyCode.Escape)){
@@ -223,8 +234,6 @@ public class MiniGame : MonoBehaviour {
 			return;
 		}
 	}
-
-	public virtual void SetUpTitle(){}
 	public virtual void SetUpLose(){}
 	public virtual void SetUpWin(){}
 	public virtual void SetUp(){}

@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour {
 
 	public GameObject DemoUI;
 	public GameObject DemoUIPanel;
+	public GameObject HintUI;
+	public GameObject HintUIPanel;
 
 	/// <summary>
 	/// The tag uses this controller. Used for housekeeping and safety (Less bugs)
@@ -202,9 +204,9 @@ public class GameManager : MonoBehaviour {
 
 	private int lastGamePlayed;
 	public void NewGame(){
-		//Calculate current stage
 		bool continueFlag = true;
 		StagePlace x;
+		//TODO: Check if there is a stage unlocked
 		while (continueFlag){
 			gameNumber = lastGamePlayed;
 			while(gameNumber == lastGamePlayed){
@@ -222,28 +224,11 @@ public class GameManager : MonoBehaviour {
 				}
 			}
 		}
-		//Show Title
 		ThereIsAGame = true;
-		TitleProcedure(gameNumber);
-		//Show Demo
 		StartGame (gameNumber);
 		lastGamePlayed = gameNumber;
 	}
 
-	/// <summary>
-	/// DEPRECATED: Shows the titleUI of the game number
-	/// </summary>
-	/// <returns>None</returns>
-	/// <param name="gameNumber">The game number</param>
-	IEnumerator TitleProcedure(int gameNumber){
-		if (GetDifficulty() != Difficulty.Impossible){
-			GameObject titleUI = Instantiate(GetGame(gameNumber).TitleCard);
-			yield return new WaitForSeconds(1f);
-			DestroyObject (titleUI);
-		}
-		//GetGame (gameNumber).TitleCard.SetActive (false);
-	}
-	
 	bool hasPlayed(string title){
 		return playedGamesTitle.Contains (title);
 	}

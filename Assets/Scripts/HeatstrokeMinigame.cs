@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class HeatstrokeMinigame : MiniGame {
@@ -76,11 +76,6 @@ public class HeatstrokeMinigame : MiniGame {
 			}
 		}
 		return x;
-	}
-	
-
-	public override void SetUpTitle(){
-
 	}
 
 	public override void SetUpLose(){

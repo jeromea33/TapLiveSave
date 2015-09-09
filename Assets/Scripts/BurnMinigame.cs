@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 /// <summary>
@@ -48,12 +48,6 @@ public class BurnMinigame : MiniGame {
 
 	protected float getHandleRotation(){
 		return handle.transform.rotation.eulerAngles.z;
-	}
-
-
-
-	public override void SetUpTitle(){
-
 	}
 
 	public override void SetUpLose(){

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using TouchScript.Gestures.Simple;
 
@@ -53,11 +53,6 @@ public class NosebleedMinigame : MiniGame {
 		maskLeft.GetComponent<SimplePanGesture>().PanCompleted -= OnPanEndLeft;
 		maskRight.GetComponent<SimplePanGesture>().PanStarted -= OnPanStartRight;
 		maskRight.GetComponent<SimplePanGesture>().PanCompleted -= OnPanEndRight;
-	}
-
-
-	public override void SetUpTitle(){
-
 	}
 
 	public override void SetUpLose(){

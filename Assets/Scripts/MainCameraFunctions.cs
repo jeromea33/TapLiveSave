@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using TouchScript.InputSources;
 
 /// <summary>
 /// Main camera functions.
@@ -25,6 +26,16 @@ public class MainCameraFunctions : MonoBehaviour {
 
 	public static void EnableCamera(){
 		MainCamera.SetActive (true);
+	}
+
+	public static void DisableInput(){
+		MainCamera.GetComponent<MouseInput>().enabled = false;
+		MainCamera.GetComponent<MobileInput>().enabled = false;
+	}
+
+	public static void EnableInput(){
+		MainCamera.GetComponent<MouseInput>().enabled = true;
+		MainCamera.GetComponent<MobileInput>().enabled = true;
 	}
 
 	public static void RestoreCameraPosition(){

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using TouchScript.Gestures;
 
@@ -47,14 +47,11 @@ public class FeverScript : MiniGame {
 			if (GetThermoXScale() > ThermoBreakPoint)
 				SetUpLose();
 			else
-				ThermoBar.transform.localScale += new Vector3(GetWidenRate(), 0) * Time.deltaTime;
+				if(StartProcess)
+					ThermoBar.transform.localScale += new Vector3(GetWidenRate(), 0) * Time.deltaTime;
 		}
 		else{
 		}
-	}
-
-	public override void SetUpTitle(){
-
 	}
 
 	public override void SetUpLose(){
