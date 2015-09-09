@@ -60,6 +60,7 @@ public class MiniGame : MonoBehaviour {
 
 	protected GameManager gameManager;
 	protected bool StartProcess = false;
+	protected bool stopped = false;
 
 	public void Start(){
 		if(isTesting){

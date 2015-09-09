@@ -23,7 +23,6 @@ public class BurnMinigame : MiniGame {
 	public ParticleSystem particleSystem;
 
 	private int gameWinCounter = 0;
-	private bool stopped = false;
 
 	// Update is called once per frame
 	// Bizzare math here. DO NOT TOUCH

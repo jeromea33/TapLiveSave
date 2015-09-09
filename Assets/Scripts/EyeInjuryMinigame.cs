@@ -10,7 +10,6 @@ public class EyeInjuryMinigame : MiniGame {
 	public Collider2D dropCollider;
 	public GameObject eye;
 	public Collider2D eyeCollider;
-	protected bool stopped = false;
 	protected bool checkWinLose = false;
 
 	public override void Update(){

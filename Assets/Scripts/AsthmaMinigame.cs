@@ -51,7 +51,6 @@ public class AsthmaMinigame : MiniGame {
 	public float impossibleBarDecreaseMultipler;
 
 	private float BarWidth = 0.8041242f;
-	private bool stopped = false;
 
 	// Update is called once per frame
 	public override void Update () {

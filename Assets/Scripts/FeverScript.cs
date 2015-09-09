@@ -16,8 +16,6 @@ public class FeverScript : MiniGame {
 	[Range (6.1f, 6.4f)]
 	public float ThermoBreakPoint = 6.3f;
 
-	private bool stopped = false;
-
 	void OnEnable(){
 		GetComponent<TapGesture>().Tapped += OnTap;
 	}
