@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour {
 	public GameObject DemoUIPanel;
 	public GameObject HintUI;
 	public GameObject HintUIPanel;
+	public GameObject PauseUI;
+
 
 	/// <summary>
 	/// The tag uses this controller. Used for housekeeping and safety (Less bugs)
@@ -120,6 +122,7 @@ public class GameManager : MonoBehaviour {
 	/// <param name="status">0 for lose, 1 for win.</param>
 	public void SignalEndOfGame(Difficulty difficulty, int scoreadd, bool win){
 		Debug.Log (currentMinigame.title + " has ended");
+		PauseUI.SetActive (false);
 		Destroy(currentMinigame.gameObject);
 		ScoreUI.score += scoreadd;
 		if(win){
@@ -357,11 +360,13 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void Pause(){
+		PauseUI.SetActive (false);
 		pauseMenu.SetActive (true);
 		Time.timeScale = 0f;
 	}
 
 	public void UnPause(){
+		PauseUI.SetActive (true);
 		pauseMenu.SetActive (false);
 		Time.timeScale = 1f;
 	}
@@ -416,7 +421,32 @@ public class GameManager : MonoBehaviour {
 	#endregion
 
 	public void reset(){
+		pauseMenu.SetActive (false);
+		DemoUI.SetActive (false);
+		HintUI.SetActive(false);
+		DestroyTimer();
+		try{
+			foreach(GameObject minigame in GameObject.FindGameObjectsWithTag ("Minigame")){
+				DestroyImmediate(minigame);
+			}
+		}
+		catch(UnityException e){
+		}
+		Time.timeScale = 1f;
+		ScoreUI.ResetScore();
+		ScoreUI.ResetHealth();
+		//gameManager.reset();
 		this.gameObject.SetActive (false);
 		this.gameObject.SetActive (true);
+	}
+
+	public void OnTapDemo(){
+		StartCoroutine (currentMinigame.OnTapDemoButton());
+	}
+
+	public void DestroyTimer(){
+		foreach(GameObject timer in GameObject.FindGameObjectsWithTag("TimerBar")){
+			DestroyImmediate (timer);
+		}
 	}
 }

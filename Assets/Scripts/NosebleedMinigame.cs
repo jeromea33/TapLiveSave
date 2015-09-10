@@ -33,13 +33,14 @@ public class NosebleedMinigame : MiniGame {
 		if(getBloodLength() > gameEndTreshold){
 			SetUpLose();
 		}
-		else{
+		else if (StartProcess){
 			leftToNose 	= Mathf.Abs (maskLeft.transform.position.sqrMagnitude 
 						- maskCenter.transform.position.sqrMagnitude);
 			rightToNose = Mathf.Abs (maskCenter.transform.position.sqrMagnitude
 						- maskRight.transform.position.sqrMagnitude);
 			leftToRight = Mathf.Abs (maskLeft.transform.position.sqrMagnitude 
 						- maskRight.transform.position.sqrMagnitude);
+
 			blood.transform.localScale += new Vector3(bloodSpreadSpeed ,bloodDropSpeed) * Time.deltaTime;
 			if (leftToNose <= distanceRequirment && rightToNose <= distanceRequirment && leftToRight <= distanceRequirment){
 				blood.SetActive (false);

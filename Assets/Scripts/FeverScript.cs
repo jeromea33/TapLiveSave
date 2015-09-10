@@ -33,7 +33,7 @@ public class FeverScript : MiniGame {
 		}
 		else {
 			GetComponent<TapGesture>().Tapped -= OnTap;
-			Debug.Log ("The tapping of thermometer is disabled. Coz u suck");
+			SetUpLose();
 
 		}
 	}

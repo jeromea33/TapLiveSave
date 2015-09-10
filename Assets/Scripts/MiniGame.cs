@@ -74,13 +74,16 @@ public class MiniGame : MonoBehaviour {
 
 	public IEnumerator StartMinigame(Difficulty difficulty, bool enabledemo){
 		gameManager = GameObject.FindGameObjectWithTag (GameManager.Tag).GetComponent<GameManager>();
+		currentDifficulty = difficulty;
 		if (enabledemo && DemoImage != null){
 			Debug.Log ("Wait Time: " + DemoWaitTime);
 			SetUpDemo();
-			yield return new WaitForSeconds(DemoWaitTime);
-			gameManager.DemoUI.SetActive(false);
+			yield return new WaitForSeconds(0f);
 		}
-		currentDifficulty = difficulty;
+	}
+
+	public IEnumerator OnTapDemoButton(){
+		gameManager.DemoUI.SetActive(false);
 		SetUp ();
 		try{
 			SetupCamera();
@@ -88,13 +91,13 @@ public class MiniGame : MonoBehaviour {
 		catch{}
 		SetUpHint();
 		MainCameraFunctions.DisableInput();
-		yield return new WaitForSeconds(HintWaitTime);
+		yield return new WaitForSeconds(5f);
 		MainCameraFunctions.EnableInput();
 		gameManager.HintUI.SetActive (false);
+		gameManager.PauseUI.SetActive (true);
 		if (useBar)
-			SetBarUI(difficulty);
-		Debug.Log ("Current Game Difficulty: " + difficulty);
-		currentDifficulty = difficulty;
+			SetBarUI(currentDifficulty);
+		Debug.Log ("Current Game Difficulty: " + currentDifficulty);
 		isTesting = false;
 		StartProcess = true;
 	}
@@ -201,7 +204,7 @@ public class MiniGame : MonoBehaviour {
 		gameObject.SetActive (true);
 	}
 
-	protected void DestroyTimer(){
+	public void DestroyTimer(){
 		foreach(GameObject timer in GameObject.FindGameObjectsWithTag("TimerBar")){
 			DestroyImmediate (timer);
 		}

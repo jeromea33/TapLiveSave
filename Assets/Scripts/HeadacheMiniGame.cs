@@ -18,7 +18,7 @@ public class HeadacheMiniGame : MiniGame {
 				stopExecuting = true;
 				SetUpWin();
 			}
-			else if (BarUIObject.GetCurrentBarPercentage() < 0.00f){
+			else if (BarUIObject.GetCurrentBarPercentage() < 0.00f && StartProcess){
 				Debug.Log ("Lose");
 				stopExecuting = true;
 				SetUpLose();
