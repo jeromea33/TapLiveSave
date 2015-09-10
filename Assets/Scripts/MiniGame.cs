@@ -238,8 +238,16 @@ public class MiniGame : MonoBehaviour {
 			return;
 		}
 	}
-	public virtual void SetUpLose(){}
-	public virtual void SetUpWin(){}
+	public virtual void SetUpLose(){
+		stopped = true;
+		SignalForEndOfGame(0f);
+	}
+
+	public virtual void SetUpWin(){
+		stopped = true;
+		SignalForEndOfGame(1.0f);
+	}
+
 	public virtual void SetUp(){}
 }
 

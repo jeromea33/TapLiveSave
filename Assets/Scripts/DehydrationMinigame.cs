@@ -1,15 +1,40 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DehydrationMinigame : MonoBehaviour {
+public class DehydrationMinigame : MiniGame {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
+	public GameObject[] glasses;
+	public Collider2D mouthCollider;
+
 	// Update is called once per frame
-	void Update () {
-	
+
+	public override void Update(){
+		base.Update ();
+		//if(!stopped && StartProcess){
+			if(GetBarPercentage() < 0f){
+				SetUpLose();
+			}
+			else if (GetActiveGlasses() < 1){
+				SetUpWin();
+			}
+			//foreach(GameObject glass in glasses){
+				//if(mouthCollider.is)
+			//}
+		//}
+	}
+
+	public override void SetUp(){
+		foreach(GameObject glass in glasses){
+			glass.SetActive (true);
+		}
+	}
+
+	private int GetActiveGlasses(){
+		int numberOfActiveGlasses = 0;
+		foreach(GameObject glass in glasses){
+			if(glass.activeSelf)
+				numberOfActiveGlasses++;
+		}
+		return numberOfActiveGlasses;
 	}
 }

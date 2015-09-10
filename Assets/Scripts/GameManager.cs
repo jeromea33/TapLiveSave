@@ -6,6 +6,8 @@ using System.Linq;
 
 public class GameManager : MonoBehaviour {
 
+
+	public bool testrun = false;
 	public GameObject DemoUI;
 	public GameObject DemoUIPanel;
 	public GameObject HintUI;
@@ -145,7 +147,8 @@ public class GameManager : MonoBehaviour {
 	/// </summary>
 	void OnEnable () {
 		Debug.Log ("Started");
-		mainMenu.gameObject.SetActive (true);
+		if(!testrun)
+			mainMenu.gameObject.SetActive (true);
 	}
 
 	/// <summary>
