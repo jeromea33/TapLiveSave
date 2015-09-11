@@ -18,38 +18,63 @@ public class ScoringUI : MonoBehaviour {
 	public Sprite sceneFail;
 	public Sprite gameOver;
 	public GameManager gameManager;
+	public GameObject popup;
+	public StagesScript stageMap;
+	public Sprite popUpSchoolSprite;
+	public Sprite popUpOutputSprite;
 
 	public int score = 0;
 	public int numberOfHealth = 3;
 	private int internalScore = 0;
+	private bool stopProcess = false;
 
 	private bool isCounting = false;
+
+	private bool schoolPopupactivate = true;
+	private bool outdoorPopupactivate = true;
 
 	/// <summary>
 	/// To force loading of highscore
 	/// </summary>
 	void OnEnable(){
+		stopProcess = false;
 		highScoreText.text = GameManager.ForceLoadScore().ToString();
 	}
 
 	// Update is called once per frame
 	void Update () {
-		internalScore = int.Parse (scoreText.text);
-		if (internalScore < score)
-			AddToScore(1);
-		else if (internalScore > score)
-			AddToScore(-1);
-		else if (internalScore == score){
-			if (IsGameOver()){
-				GameOver();
-				return;
+		if (!stopProcess){
+			internalScore = int.Parse (scoreText.text);
+			if (internalScore < score)
+				AddToScore(1);
+			else if (internalScore > score)
+				AddToScore(-1);
+			else if (internalScore == score){
+				if (IsGameOver()){
+					GameOver();
+					return;
+				}
+				else if(isCounting == true && score == stageMap.highScoreSchoolUnlock && schoolPopupactivate){
+					schoolPopupactivate = false;
+					isCounting = false;
+					stopProcess = true;
+					popup.GetComponent<Image>().sprite = popUpSchoolSprite;
+					popup.SetActive(true);
+				}
+				else if (isCounting == true && score == stageMap.highScoreOutdoorUnlock && outdoorPopupactivate){
+					outdoorPopupactivate = false;
+					isCounting = false;
+					stopProcess = true;
+					popup.GetComponent<Image>().sprite = popUpOutputSprite;
+					popup.SetActive(true);
+				}
+				else{
+					StartCoroutine(FinishedCounting ());
+				}
 			}
-			else{
-				StartCoroutine(FinishedCounting ());
-			}
+			else
+				isCounting = false;
 		}
-		else
-			isCounting = false;
 	}
 
 	public bool IsScoreUpdateOver(){
@@ -60,6 +85,14 @@ public class ScoringUI : MonoBehaviour {
 		yield return new WaitForSeconds(1);
 		Debug.Log("Finished Counting");
 		GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>().ScoreCountingEnded();
+		stopProcess = false;
+	}
+
+	public void OnTapPopUp(){
+		Debug.Log("Finished Counting");
+		GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>().ScoreCountingEnded();
+		popup.SetActive (false);
+		stopProcess = false;
 	}
 
 	public void DecreaseHealth(){

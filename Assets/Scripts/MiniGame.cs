@@ -4,8 +4,6 @@ using UnityEngine.UI;
 
 public class MiniGame : MonoBehaviour {
 
-
-
 	[Header("Test Settings")]
 	[Tooltip("True if you are going to test the scenario")]
 	public bool isTesting = false;
@@ -80,9 +78,10 @@ public class MiniGame : MonoBehaviour {
 			SetUpDemo();
 			yield return new WaitForSeconds(0f);
 		}
+		MainCameraFunctions.DisableInput();
 	}
 
-	public IEnumerator OnTapDemoButton(){
+	public void OnTapDemoButton(){
 		gameManager.DemoUI.SetActive(false);
 		SetUp ();
 		try{
@@ -90,14 +89,16 @@ public class MiniGame : MonoBehaviour {
 		}
 		catch{}
 		SetUpHint();
-		MainCameraFunctions.DisableInput();
-		yield return new WaitForSeconds(5f);
-		MainCameraFunctions.EnableInput();
+	}
+
+	public void OnTapHintButton(){
+
 		gameManager.HintUI.SetActive (false);
 		gameManager.PauseUI.SetActive (true);
 		if (useBar)
 			SetBarUI(currentDifficulty);
 		Debug.Log ("Current Game Difficulty: " + currentDifficulty);
+		MainCameraFunctions.EnableInput();
 		isTesting = false;
 		StartProcess = true;
 	}
@@ -239,11 +240,13 @@ public class MiniGame : MonoBehaviour {
 		}
 	}
 	public virtual void SetUpLose(){
+		StopTimer();
 		stopped = true;
 		SignalForEndOfGame(0f);
 	}
 
 	public virtual void SetUpWin(){
+		StopTimer();
 		stopped = true;
 		SignalForEndOfGame(1.0f);
 	}

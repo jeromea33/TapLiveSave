@@ -444,12 +444,16 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void OnTapDemo(){
-		StartCoroutine (currentMinigame.OnTapDemoButton());
+		currentMinigame.OnTapDemoButton();
 	}
 
 	public void DestroyTimer(){
 		foreach(GameObject timer in GameObject.FindGameObjectsWithTag("TimerBar")){
 			DestroyImmediate (timer);
 		}
+	}
+
+	public void OnTapHint(){
+		currentMinigame.OnTapHintButton();
 	}
 }

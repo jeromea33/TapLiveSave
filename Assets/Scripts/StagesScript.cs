@@ -79,15 +79,12 @@ public class StagesScript : MonoBehaviour {
 	/// On start of the script, gets GameManager instance and colors everyone
 	/// Also initializes GameStatus and set the list of titles.
 	/// </summary>
-	void Start(){
+	void OnEnable(){
 		gameManager = (GameManager)GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
 		GamesStatus.InitializeStatus(gameManager.resetMinigameStats);
 		MainCameraFunctions.DisableCamera();
 		GetStageOfTitles();
 		goColor ();
-	}
-
-	void OnEnable(){
 		GameObject.FindGameObjectWithTag(GameManager.Tag).GetComponent<GameManager>().ScoreUI.ResetHealth();
 	}
 
