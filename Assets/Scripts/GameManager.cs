@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
 
 
 	public bool testrun = false;
+	public int MinigameTestNumber;
 	public GameObject DemoUI;
 	public GameObject DemoUIPanel;
 	public GameObject HintUI;
@@ -147,8 +148,7 @@ public class GameManager : MonoBehaviour {
 	/// </summary>
 	void OnEnable () {
 		Debug.Log ("Started");
-		if(!testrun)
-			mainMenu.gameObject.SetActive (true);
+		mainMenu.gameObject.SetActive (true);
 	}
 
 	/// <summary>
@@ -210,6 +210,10 @@ public class GameManager : MonoBehaviour {
 
 	private int lastGamePlayed;
 	public void NewGame(){
+		if(testrun){
+			StartGame (MinigameTestNumber);
+			return;
+		}
 		bool continueFlag = true;
 		StagePlace x;
 		//TODO: Check if there is a stage unlocked
@@ -275,6 +279,8 @@ public class GameManager : MonoBehaviour {
 	/// </summary>
 	/// <returns>The difficulty.</returns>
 	Difficulty GetDifficulty(){
+		if(testrun)
+			return TestRunDifficulty();
 		if (MinigamesFinished <= toEasyDifficultyGamesRequirment)
 			return Difficulty.VeryEasy;
 		else if (MinigamesFinished <= toEasyDifficultyGamesRequirment
@@ -294,6 +300,21 @@ public class GameManager : MonoBehaviour {
 		         + toHardDifficultyGamesRequirment
 		         + toVeryHardDifficultyGamesRequirment
 		         + toImpossibleDifficultyGamesRequirment)
+			return Difficulty.VeryHard;
+		else
+			return Difficulty.Impossible;
+	}
+
+	Difficulty TestRunDifficulty(){
+		if (MinigamesFinished < 1)
+			return Difficulty.VeryEasy;
+		else if (MinigamesFinished == 1)
+			return Difficulty.Easy;
+		else if (MinigamesFinished == 2)
+			return Difficulty.Intermediate;
+		else if (MinigamesFinished == 3)
+			return Difficulty.Hard;
+		else if (MinigamesFinished == 4)
 			return Difficulty.VeryHard;
 		else
 			return Difficulty.Impossible;

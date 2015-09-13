@@ -44,6 +44,7 @@ public class ChokingMinigame : MiniGame {
 
 	public override void SetUpWin(){
 		GetComponent<Animator>().SetTrigger ("WinTrigger");
+		MainCameraFunctions.DisableInput();
 		BarUIObject.MakeBarFull();
 		BarUIObject.gameObject.SetActive (false);
 	}
@@ -70,5 +71,6 @@ public class ChokingMinigame : MiniGame {
 	public override void SetUpLose(){
 		GetComponent<Animator>().SetTrigger("LoseTrigger");
 		BarUIObject.gameObject.SetActive(false);
+		MainCameraFunctions.DisableInput();
 	}
 }

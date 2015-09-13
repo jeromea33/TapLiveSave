@@ -240,6 +240,7 @@ public class MiniGame : MonoBehaviour {
 		}
 	}
 	public virtual void SetUpLose(){
+		MainCameraFunctions.DisableInput();
 		StopTimer();
 		stopped = true;
 		SignalForEndOfGame(0f);

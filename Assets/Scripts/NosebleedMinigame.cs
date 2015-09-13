@@ -58,6 +58,7 @@ public class NosebleedMinigame : MiniGame {
 
 	public override void SetUpLose(){
 		Nosebleed.SetActive (false);
+		blood.SetActive (false);
 		LoseUI.SetActive(true);
 	}
 

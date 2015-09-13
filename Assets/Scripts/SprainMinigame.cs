@@ -27,7 +27,7 @@ public class SprainMinigame : MiniGame {
 			if(bandagesInCorrectPosition >= bandagePoints.Length){
 				SetUpWin();
 			}
-			else if (GetBarPercentage() > 1f && StartProcess){
+			else if (GetBarPercentage() < 0f && StartProcess){
 				SetUpLose();
 			}
 		}
