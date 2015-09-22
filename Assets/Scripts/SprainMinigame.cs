@@ -7,6 +7,7 @@ public class SprainMinigame : MiniGame {
 	[Header("Sprain Settings")]
 	public GameObject[] bandages;
 	public GameObject[] bandagePoints;
+	public GameObject feet;
 
 	int index = 0;
 	int bandagesInCorrectPosition = 0;
@@ -34,12 +35,22 @@ public class SprainMinigame : MiniGame {
 	}
 
 	public override void SetUpWin(){
+		foreach(GameObject bandage in bandages){
+			DestroyImmediate(bandage);
+		}
+		DestroyImmediate(feet);
 		stopped = true;
-		SignalForEndOfGame (1f);
+		DestroyTimer();
+		WinUI.SetActive (true);
 	}
 
 	public override void SetUpLose(){
+		foreach(GameObject bandage in bandages){
+			DestroyImmediate(bandage);
+		}
+		DestroyImmediate(feet);
 		stopped = true;
-		SignalForEndOfGame (0f);
+		DestroyTimer();
+		LoseUI.SetActive(true);
 	}
 }

@@ -27,7 +27,9 @@ public class HeadacheMiniGame : MiniGame {
 	}
 
 	public override void SetUpLose(){
-		SignalForEndOfGame(0f);
+		stopped = true;
+		StopTimer();
+		LoseUI.SetActive(true);
 	}
 
 	private bool winFlag = false;

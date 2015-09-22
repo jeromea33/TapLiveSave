@@ -18,16 +18,18 @@ public class SpinalCordMinigame : MiniGame {
 		}
 	}
 
-	public override void SetUpLose(){
-		BarUI.StopTimer();
-		Debug.Log ("Spinal Lose");
-		SignalForEndOfGame (0f);
+	public override void SetUpWin(){
+		Girl.SetActive(false);
+		stopped = true;
+		DestroyTimer();
+		WinUI.SetActive (true);
 	}
 
-	public override void SetUpWin(){
-		BarUI.StopTimer();
-		Debug.Log ("Spinal Win");
-		SignalForEndOfGame (1.0f);
+	public override void SetUpLose(){
+		Girl.SetActive(false);
+		stopped = true;
+		DestroyTimer();
+		LoseUI.SetActive(true);
 	}
 
 	public override void SetUp(){

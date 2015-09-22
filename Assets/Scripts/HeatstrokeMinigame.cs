@@ -78,11 +78,15 @@ public class HeatstrokeMinigame : MiniGame {
 		return x;
 	}
 
-	public override void SetUpLose(){
-		SignalForEndOfGame (0);
+	public override void SetUpWin(){
+		stopped = true;
+		DestroyTimer();
+		WinUI.SetActive (true);
 	}
 
-	public override void SetUpWin(){
-		SignalForEndOfGame (1);
+	public override void SetUpLose(){
+		stopped = true;
+		DestroyTimer();
+		LoseUI.SetActive(true);
 	}
 }

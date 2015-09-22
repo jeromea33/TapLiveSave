@@ -37,9 +37,15 @@ public class EyeInjuryMinigame : MiniGame {
 	}
 
 	public override void SetUpWin(){
-		SignalForEndOfGame(1.0f);
+		stopped = true;
+		DestroyTimer();
+
+		WinUI.SetActive (true);
 	}
+
 	public override void SetUpLose(){
-		SignalForEndOfGame(0f);
+		stopped = true;
+		DestroyTimer();
+		LoseUI.SetActive(true);
 	}
 }

@@ -4,6 +4,7 @@ using System.Collections;
 public class AnimalBiteMinigame : MiniGame {
 
 	public GameObject[] animalBits;
+	public GameObject feet;
 
 	private bool win = false;
 	public override void Update(){
@@ -31,6 +32,7 @@ public class AnimalBiteMinigame : MiniGame {
 	}
 
 	public override void SetUpWin(){
+		DestroyImmediate(feet);
 		stopped = true;
 		DestroyTimer();
 
@@ -38,8 +40,9 @@ public class AnimalBiteMinigame : MiniGame {
 	}
 
 	public override void SetUpLose(){
+		DestroyImmediate(feet);
 		stopped = true;
 		DestroyTimer();
-		SignalForEndOfGame(0f);
+		LoseUI.SetActive(true);
 	}
 }

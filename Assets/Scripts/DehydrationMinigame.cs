@@ -37,4 +37,16 @@ public class DehydrationMinigame : MiniGame {
 		}
 		return numberOfActiveGlasses;
 	}
+
+	public override void SetUpWin(){
+		stopped = true;
+		DestroyTimer();
+		WinUI.SetActive (true);
+	}
+
+	public override void SetUpLose(){
+		stopped = true;
+		DestroyTimer();
+		LoseUI.SetActive(true);
+	}
 }

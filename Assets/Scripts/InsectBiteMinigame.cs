@@ -48,4 +48,16 @@ public class InsectBiteMinigame : MiniGame {
 	void OnDoubleTap(object sender, System.EventArgs args){
 		Instantiate(cream, creamStartPosition.transform.position, Quaternion.identity);
 	}
+	
+	public override void SetUpWin(){
+		stopped = true;
+		DestroyTimer();
+		WinUI.SetActive (true);
+	}
+
+	public override void SetUpLose(){
+		stopped = true;
+		DestroyTimer();
+		LoseUI.SetActive(true);
+	}
 }
