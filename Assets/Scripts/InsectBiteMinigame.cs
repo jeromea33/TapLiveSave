@@ -40,6 +40,7 @@ public class InsectBiteMinigame : MiniGame {
 
 	void OnDisable(){
 		foreach(GameObject g in GameObject.FindGameObjectsWithTag ("Cream")){
+            g.SetActive(false);
 			DestroyImmediate(g);
 		}
 		creamContainer.Tapped -= OnDoubleTap;

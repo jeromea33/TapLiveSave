@@ -50,21 +50,20 @@ public class BrokenFinger : MiniGame {
 			DestroyImmediate(bandagePart.gameObject);
 		}
 		finger.SetActive(false);
-		SignalForEndOfGame(0f);
-		//LoseUI.SetActive(true);
+		//SignalForEndOfGame(0f);
+		LoseUI.SetActive(true);
 	}
 
 	public override void SetUpWin(){
 		stopped = true;
 		DestroyTimer();
-		DestroyTimer();
 		pencil.SetActive(false);
 		foreach(BrokenFingerBandage bandagePart in bandageParts){
-			DestroyImmediate(bandagePart);
+			bandagePart.gameObject.SetActive(false);
 		}
 		finger.SetActive(false);
-		SignalForEndOfGame(1.0f);
-		//WinUI.SetActive(true);
+		//SignalForEndOfGame(1.0f);
+		WinUI.SetActive(true);
 	}
 
 }

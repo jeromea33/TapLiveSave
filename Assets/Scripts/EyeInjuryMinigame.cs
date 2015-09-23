@@ -11,6 +11,7 @@ public class EyeInjuryMinigame : MiniGame {
 	public GameObject eye;
 	public Collider2D eyeCollider;
 	protected bool checkWinLose = false;
+    protected bool stopChecking = false;
 
 	public override void Update(){
 		base.Update();
@@ -21,10 +22,12 @@ public class EyeInjuryMinigame : MiniGame {
 				stopped = true;
 				drop.GetComponent<Rigidbody2D>().isKinematic = false;
 			}
+            
 		}
-		if (checkWinLose){
-			check();
-		}
+        if (checkWinLose && !stopChecking)
+        {
+            check();
+        }
 	}
 
 	public void check(){
@@ -39,13 +42,14 @@ public class EyeInjuryMinigame : MiniGame {
 	public override void SetUpWin(){
 		stopped = true;
 		DestroyTimer();
-
+        stopChecking = true;
 		WinUI.SetActive (true);
 	}
 
 	public override void SetUpLose(){
 		stopped = true;
 		DestroyTimer();
+        stopChecking = true;
 		LoseUI.SetActive(true);
 	}
 }

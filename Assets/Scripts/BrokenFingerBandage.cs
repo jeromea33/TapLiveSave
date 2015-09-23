@@ -4,13 +4,14 @@ using TouchScript.Gestures;
 
 public class BrokenFingerBandage : MonoBehaviour {
 
-	public SpriteRenderer usedSprite;
+	private SpriteRenderer usedSprite;
 	//Reference to parent
-	public BrokenFinger referenceToParent;
+	private BrokenFinger referenceToParent;
 
 	void OnEnable(){
 		usedSprite = GetComponent<SpriteRenderer>();
 		usedSprite.enabled = false;
+		referenceToParent = GetComponentInParent<BrokenFinger>();
 		GetComponent<TapGesture>().Tapped += OnTap;
 	}
 

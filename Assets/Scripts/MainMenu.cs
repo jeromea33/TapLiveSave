@@ -16,6 +16,7 @@ public class MainMenu : MonoBehaviour {
 	
 	void OnEnable(){
 		currentHighScore = GameManager.ForceLoadScore();
+		GameManager.carmela = GameManager.ForceLoadScore();
 	}
 
 /**

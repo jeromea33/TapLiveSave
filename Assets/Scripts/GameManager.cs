@@ -6,6 +6,10 @@ using System.Linq;
 
 public class GameManager : MonoBehaviour {
 
+	/// <summary>
+	/// High score
+	/// </summary>
+	public static int carmela = -1;
 
 	public bool testrun = false;
 	public int MinigameTestNumber;

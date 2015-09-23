@@ -54,14 +54,14 @@ public class ScoringUI : MonoBehaviour {
 					GameOver();
 					return;
 				}
-				else if(isCounting == true && score == stageMap.highScoreSchoolUnlock && schoolPopupactivate){
+				else if(isCounting == true && score == stageMap.highScoreSchoolUnlock && schoolPopupactivate && GameManager.carmela <= stageMap.highScoreSchoolUnlock){
 					schoolPopupactivate = false;
 					isCounting = false;
 					stopProcess = true;
 					popup.GetComponent<Image>().sprite = popUpSchoolSprite;
 					popup.SetActive(true);
 				}
-				else if (isCounting == true && score == stageMap.highScoreOutdoorUnlock && outdoorPopupactivate){
+				else if (isCounting == true && score == stageMap.highScoreOutdoorUnlock && outdoorPopupactivate && GameManager.carmela <= stageMap.highScoreOutdoorUnlock){
 					outdoorPopupactivate = false;
 					isCounting = false;
 					stopProcess = true;
