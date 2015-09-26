@@ -13,6 +13,7 @@ public class InsectBiteMinigame : MiniGame {
 	public GameObject cream;
 	public TapGesture creamContainer;
 	public GameObject creamStartPosition;
+    public GameObject takip;
 
 	public bool AllBitesTouchedByCreams(){
 		foreach (GameObject bite in bites){
@@ -51,12 +52,14 @@ public class InsectBiteMinigame : MiniGame {
 	}
 	
 	public override void SetUpWin(){
-		stopped = true;
+        cream.SetActive(false);
+        stopped = true;
 		DestroyTimer();
 		WinUI.SetActive (true);
 	}
 
 	public override void SetUpLose(){
+        cream.SetActive(false);
 		stopped = true;
 		DestroyTimer();
 		LoseUI.SetActive(true);

@@ -5,6 +5,7 @@ public class EyeInjuryMinigame : MiniGame {
 
 	[Range(1f, 30f)]
 	public float moveSpeed;
+	public GameObject guy;
 	public GameObject glass;
 	public GameObject drop;
 	public Collider2D dropCollider;
@@ -40,9 +41,11 @@ public class EyeInjuryMinigame : MiniGame {
 	}
 
 	public override void SetUpWin(){
+        glass.SetActive(false);
 		stopped = true;
 		DestroyTimer();
         stopChecking = true;
+        guy.SetActive(false);
 		WinUI.SetActive (true);
 	}
 
@@ -50,6 +53,7 @@ public class EyeInjuryMinigame : MiniGame {
 		stopped = true;
 		DestroyTimer();
         stopChecking = true;
+        guy.SetActive(false);
 		LoseUI.SetActive(true);
 	}
 }

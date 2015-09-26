@@ -5,6 +5,9 @@ public class DehydrationMinigame : MiniGame {
 
 	public GameObject[] glasses;
 	public Collider2D mouthCollider;
+    public GameObject tao;
+    public GameObject lamesa;
+
 
 	// Update is called once per frame
 
@@ -42,11 +45,13 @@ public class DehydrationMinigame : MiniGame {
 		stopped = true;
 		DestroyTimer();
 		WinUI.SetActive (true);
+        tao.SetActive(false);
 	}
 
 	public override void SetUpLose(){
 		stopped = true;
 		DestroyTimer();
 		LoseUI.SetActive(true);
+        tao.SetActive(false);
 	}
 }

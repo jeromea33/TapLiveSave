@@ -8,7 +8,7 @@ public class TimerBarUI : MonoBehaviour {
 	public Image fullBar;
 	public float BarSpeed = 1f;
 	public TimerBarAction initialAction;
-	public float initialBarValuePercentage = 50f;
+	public float initialBarValuePercentage = 100f;
 
 	private float BarValue;
 	private float fullBarInitialSize;

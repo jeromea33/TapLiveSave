@@ -49,6 +49,7 @@ public class FaintingScenario : MiniGame {
 
 	public override void SetUpLose(){
 		stopped = true;
+		glass.SetActive(false);
 		DestroyTimer();
 		LoseUI.SetActive(true);
 	}
